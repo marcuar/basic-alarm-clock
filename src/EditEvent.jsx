@@ -21,7 +21,7 @@ const EditEvent = () => {
   useEffect(() => {
     const fetchAlarms = async () => {
       try {
-        const alarm = await axios.get(`http://localhost:3500/alarms/${id}`, {})
+        const alarm = await axios.get(`https://basic-alarm-clock-server.onrender.com/alarms/${id}`, {})
         if(alarm.data) {
           console.log(alarm.data.completionTime)
           setFormData({
@@ -50,7 +50,7 @@ const EditEvent = () => {
   const handleSubmit = async (e) => {
   e.preventDefault();
   console.log(formData);
-  await axios.patch('http://localhost:3500/alarms', formData)
+  await axios.patch('https://basic-alarm-clock-server.onrender.com/alarms', formData)
     .then((res) => {
       setIsUpdating(false);
       console.log(res.data);

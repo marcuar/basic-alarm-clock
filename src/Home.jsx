@@ -30,7 +30,7 @@ const Home = () => {
     const fetchAlarms = async () => {
       try {
         userId = localStorage.getItem('eventManagerUserId');
-        const alarms = await axios.get(`http://localhost:3500/alarms?userId=${userId}`, {})
+        const alarms = await axios.get(`https://basic-alarm-clock-server.onrender.com/alarms?userId=${userId}`, {})
         if(alarms.data) {
           setIsLoading(false);
           console.log(alarms.data);
@@ -51,7 +51,7 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsAdding(true);
-    axios.post('http://localhost:3500/alarms', formData)
+    axios.post('https://basic-alarm-clock-server.onrender.com/alarms', formData)
       .then((res) => {
         console.log(res.data);
         setAlarms(res.data);
@@ -73,7 +73,7 @@ const Home = () => {
     if(!id) return;
     setIsDeleting({status: true, id});
     try {
-      const res = await axios.delete(`http://localhost:3500/alarms?id=${id}`);
+      const res = await axios.delete(`https://basic-alarm-clock-server.onrender.com/alarms?id=${id}`);
       console.log(res.data);
       setAlarms(res.data);
       setIsDeleting({status: false, id: null});
