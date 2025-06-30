@@ -33,9 +33,7 @@ const Home = () => {
         console.log(userId)
         const alarms = await axios.get(`https://basic-alarm-clock-server.onrender.com/alarms?userId=${userId}`, {})
         console.log(alarms)
-        if(alarms.data.length === 0) {
-          console.log(alarms.data);
-        } else {
+        if(alarms.data) {
           setIsLoading(false);
           console.log(alarms.data);
           setAlarms(alarms.data);
@@ -109,7 +107,7 @@ const Home = () => {
           <button type='submit' className="bg-black py-[5px] w-full font-bold rounded-sm text-white cursor-pointer hover:opacity-85 transition-all">{isAdding ? "Adding..." : "Add"}</button>
         </form>
         {isLoading ? <p className='mt-5'>Loading...</p> : (alarms && alarms.length < 0 ) ? <p>No event yet!</p> : <section className='w-full max-w-md flex flex-col items-center justify-start mt-1'>
-          {alarms.sort((a, b) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0).map((alarm) => <article key={alarm._id} className="w-full max-w-md bg-blue-950 p-3 rounded-md my-1 shadow-sm flex justify-between">
+          {alarms.length < 0 && alarms.sort((a, b) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0).map((alarm) => <article key={alarm._id} className="w-full max-w-md bg-blue-950 p-3 rounded-md my-1 shadow-sm flex justify-between">
             <div>
               <h2 className="text-[1.1rem] text-white font-bold font-poppins">{alarm.title}</h2>
               <p className="text-[0.9rem] text-white font-poppins">{alarm.content}</p>
