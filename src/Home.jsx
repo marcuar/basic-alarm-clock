@@ -33,7 +33,9 @@ const Home = () => {
         console.log(userId)
         const alarms = await axios.get(`https://basic-alarm-clock-server.onrender.com/alarms?userId=${userId}`, {})
         console.log(alarms)
-        if(alarms.data) {
+        if(alarms.data.length === 0) {
+          console.log(alarms.data);
+        } else {
           setIsLoading(false);
           console.log(alarms.data);
           setAlarms(alarms.data);
