@@ -30,6 +30,7 @@ const Home = () => {
     const fetchAlarms = async () => {
       try {
         userId = localStorage.getItem('eventManagerUserId');
+        console.log(userId)
         const alarms = await axios.get(`https://basic-alarm-clock-server.onrender.com/alarms?userId=${userId}`, {})
         console.log(alarms)
         if(alarms.data) {
